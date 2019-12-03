@@ -28,7 +28,7 @@ session_start();
 
 <body>
     <?php
-			$_SESSION['searchAdmin'] = null;
+			$_SESSION['searchEngineAdmin'] = null;
 			$_SESSION['customerLoggedIn'] = null;
 			$_SESSION['user'] = null;
 

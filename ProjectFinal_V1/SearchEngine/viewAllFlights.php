@@ -48,7 +48,7 @@ require '../database-connection.php';
 
                     <?php
 					//change nav if signed in
-                    if(isset($_SESSION['searchAdmin'])){
+                    if(isset($_SESSION['searchEngineAdmin'])){
                         	print '
 
 					<li class="nav-item">
