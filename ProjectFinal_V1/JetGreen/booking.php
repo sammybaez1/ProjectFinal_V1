@@ -60,7 +60,7 @@ function book($flightID){
                     </li>
                     <?php
 					//change nav if signed in
-                    if(isset($_SESSION['admin'])){
+                    if(isset($_SESSION['JetGreenAdmin'])){
                         	print '
 
 					<li class="nav-item">
@@ -68,7 +68,7 @@ function book($flightID){
 					</ li>
 					';
                     }
-					else if (isset($_SESSION["loggedin"])) {
+					else if (isset($_SESSION["customerLoggedIn"])) {
 						print '
 
 					<li class="nav-item">
@@ -89,12 +89,18 @@ function book($flightID){
 
                 <?php
 				//change nav if signed in
-				if (!isset($_SESSION["loggedin"])) {
+				if(isset($_SESSION['JetGreenAdmin'])){
+                    print " Logged In: ";
+					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['greenAdmin'] . '  </a>';
+					print " | ";
+					print '<a id="signOut" class="account" S href="signout.php">Log Out</a>';
+                }
+
+				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
 							<a id="registerAccount" class="account" S href="Register.php">Register</a>
 							';
-                    
 				} else {
 					print " Logged In: ";
 					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['user'] . '  </a>';
@@ -114,10 +120,10 @@ function book($flightID){
     </div>
     <div id="SignInPrompt">
         <?php
-          if(isset($_SESSION['admin'])){
+          if(isset($_SESSION['JetGreenAdmin'])){
                 print '<p align="center"> Log in as customer to book<p>';
             }
-        else if (!isset($_SESSION["loggedin"])) {
+        else if (!isset($_SESSION["customerLoggedIn"])) {
             print '<p align="center"> Must be logged in to book </p>';        
         }else{
             

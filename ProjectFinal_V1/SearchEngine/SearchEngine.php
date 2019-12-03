@@ -51,7 +51,7 @@ function book($flightID){
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="JetRed.php">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="SearchEngine.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../directory.php">Directory</a>
@@ -59,7 +59,7 @@ function book($flightID){
 
                     <?php
 					//change nav if signed in
-                    if(isset($_SESSION['admin'])){
+                    if(isset($_SESSION['searchAdmin'])){
                         	print '
 
 					<li class="nav-item">
@@ -67,7 +67,7 @@ function book($flightID){
 					</ li>
 					';
                     }
-					else if (isset($_SESSION["loggedin"])) {
+					else if (isset($_SESSION["customerLoggedIn"])) {
 						print '
 					<li class="nav-item">
 						<a class="nav-link" href="myprofile.php">My Flights</a>
@@ -85,12 +85,19 @@ function book($flightID){
 
                 <?php
 				//change nav if signed in
-				if (!isset($_SESSION["loggedin"])) {
+				if(isset($_SESSION['searchEngineAdmin'])){
+                    print " Logged In: ";
+					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['searchAdmin'] . '  </a>';
+					print " | ";
+					print '<a id="signOut" class="account" S href="signout.php">Log Out</a>';
+                }
+
+				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
 							<a id="registerAccount" class="account" S href="Register.php">Register</a>
 							';
-				} else {
+				}else {
 					print " Logged In: ";
 					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['user'] . '  </a>';
 					print " | ";
@@ -197,7 +204,7 @@ function book($flightID){
 
         <?php
         if(array_key_exists('Submit',$_POST)){
-           if(!isset($_SESSION['loggedin'])){
+           if(!isset($_SESSION['customerLoggedIn'])){
                print'
                    <div align="center">
                        <button type="button" onclick="sortByAirline()">Sort by airline</button>

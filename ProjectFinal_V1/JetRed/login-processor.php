@@ -39,21 +39,20 @@ session_start();
 	$result = $mysqli->query($query);
 
 	if ($result->num_rows === 0) {
-        $result = query('SELECT * FROM administrators WHERE user_id="' . $user_id . '" AND password="' . $password . '" and bookingPageID = "JetRed";');
+        $result = query('SELECT * FROM Administrators WHERE user_id="' . $user_id . '" AND password="' . $password . '" and bookingPageID = "JetRed";');
         if($result->num_rows === 0){
             //failed to login
         }else{
             $user = $result->fetch_assoc();
-            $_SESSION['admin'] = true;
-            $_SESSION['loggedin'] = true;
-            $_SESSION['user'] =  $user['user_id'];
+            $_SESSION['JetRedAdmin'] = true;
+            $_SESSION['redAdmin'] =  $user['user_id'];
         }
         
         
 	} else {
 		$user = $result->fetch_assoc();
 
-		$_SESSION['loggedin'] = true;
+		$_SESSION['customerLoggedIn'] = true;
 		$_SESSION['user'] =  $user['user_id'];
 	}
 
@@ -83,7 +82,7 @@ session_start();
                     </li>
                     <?php
 					//change nav if signed in
-                    if(isset($_SESSION['admin'])){
+                    if(isset($_SESSION['JetRedAdmin'])){
                         	print '
 
 					<li class="nav-item">
@@ -91,7 +90,7 @@ session_start();
 					</ li>
 					';
                     }
-					else if (isset($_SESSION["loggedin"])) {
+					else if (isset($_SESSION["customerLoggedIn"])) {
 						print '
 
 					<li class="nav-item">
@@ -109,12 +108,22 @@ session_start();
 
                 <?php
 				//change nav if signed in
-				if (!isset($_SESSION["loggedin"])) {
+                
+                if(isset($_SESSION['JetRedAdmin'])){
+                    print " Logged In: ";
+					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['redAdmin'] . '  </a>';
+					print " | ";
+					print '<a id="signOut" class="account" S href="signout.php">Log Out</a>';
+                }
+
+				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
 							<a id="registerAccount" class="account" S href="Register.php">Register</a>
 							';
-				} else {
+				} 
+
+                else {
 					print " Logged In: ";
 					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['user'] . '  </a>';
 					print " | ";
@@ -136,11 +145,11 @@ session_start();
 			$user = $result->fetch_assoc();
 			echo 'Success ' . $user['user_id'];
 
-			if (!$_SESSION["loggedin"]) {
-				print "?";
-			} else {
+			//if (!isset($_SESSION["customerLoggedIn"])) {
+				//print "?";
+			//} else {
 				print " Logged In";
-			}
+			//}
 
 			?>
         </div>

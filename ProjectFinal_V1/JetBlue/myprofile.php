@@ -58,7 +58,7 @@ function cancel($flightID){
                     </li>
                     <?php
 					//change nav if signed in
-					if (isset($_SESSION["loggedin"])) {
+					if (isset($_SESSION["customerLoggedIn"])) {
 						print '
 
 					<li class="nav-item">
@@ -76,12 +76,19 @@ function cancel($flightID){
 
                 <?php
 				//change nav if signed in
-				if (!isset($_SESSION["loggedin"])) {
+				if(isset($_SESSION['JetBlueAdmin'])){
+                    print " Logged In: ";
+					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['blueAdmin'] . '  </a>';
+					print " | ";
+					print '<a id="signOut" class="account" S href="signout.php">Log Out</a>';
+                }
+
+				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
 							<a id="registerAccount" class="account" S href="Register.php">Register</a>
 							';
-				} else {
+				}  else {
 					print " Logged In: ";
 					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['user'] . '  </a>';
 					print " | ";

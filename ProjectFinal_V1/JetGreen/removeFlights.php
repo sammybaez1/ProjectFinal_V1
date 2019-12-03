@@ -71,7 +71,7 @@ function remove($flightID){
 
                     <?php
 					//change nav if signed in
-                    if(isset($_SESSION['admin'])){
+                    if(isset($_SESSION['JetGreenAdmin'])){
                         	print '
 
 					<li class="nav-item">
@@ -80,7 +80,7 @@ function remove($flightID){
 					'; 
                         
                     }
-					else if (isset($_SESSION["loggedin"])) {
+					else if (isset($_SESSION["customerLoggedIn"])) {
 						print '
 
 					<li class="nav-item">
@@ -98,12 +98,19 @@ function remove($flightID){
 
                 <?php
 				//change nav if signed in
-				if (!isset($_SESSION["loggedin"])) {
+				if(isset($_SESSION['JetGreenAdmin'])){
+                    print " Logged In: ";
+					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['greenAdmin'] . '  </a>';
+					print " | ";
+					print '<a id="signOut" class="account" S href="signout.php">Log Out</a>';
+                }
+
+				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
 							<a id="registerAccount" class="account" S href="Register.php">Register</a>
 							';
-				} else {
+				}else {
 					print " Logged In: ";
 					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['user'] . '  </a>';
 					print " | ";

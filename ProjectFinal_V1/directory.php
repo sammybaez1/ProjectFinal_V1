@@ -3,17 +3,25 @@ session_start();
 if(!isset($_SESSION['currentDate'])){
     $_SESSION['currentDate'] = $_POST['currentDate'];
 }
-if(isset($_SESSION['admin'])){
-    $_SESSION['admin'] = null;
-    $_SESSION['loggedin'] = null;
-}
+
 //IF YOU WANT TO LOG OUT WHEN GOING BACK TO DIRECTORY
 // UNCOMMENT THIS CODE 
 
 /*
-if(isset($_SESSION['loggedin'])){
-    $_SESSION['loggedin'] = null;
+if(isset($_SESSION['customerLoggedIn'])){
+    $_SESSION['customerLoggedIn'] = null;
 }
+
+if(isset($_SESSION['admin'])){
+    $_SESSION['admin'] = null;
+    $_SESSION['customerLoggedIn'] = null;
+}
+
+
+
+
+
+
 */
 
 ?>
@@ -66,7 +74,7 @@ if(isset($_SESSION['loggedin'])){
                 <li><a href="./JetGreen/JetGreen.php">JetGreen</a></li>
                 <li><a href="./JetBlue/JetBlue.php">JetBlue</a></li>
             </ul>
-            <a href="./SearchEngine/searchEngine.php">SearchEngine</a>
+            <a href="./SearchEngine/SearchEngine.php">SearchEngine</a>
         </div>
     </div>
 

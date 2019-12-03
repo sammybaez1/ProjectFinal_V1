@@ -48,7 +48,7 @@ require '../database-connection.php';
 
                     <?php
 					//change nav if signed in
-                    if(isset($_SESSION['admin'])){
+                    if(isset($_SESSION['JetRedAdmin'])){
                         	print '
 
 					<li class="nav-item">
@@ -56,7 +56,7 @@ require '../database-connection.php';
 					</ li>
 					';
                     }
-					else if (isset($_SESSION["loggedin"])) {
+					else if (isset($_SESSION["customerLoggedIn"])) {
 						print '
 
 					<li class="nav-item">
@@ -74,12 +74,22 @@ require '../database-connection.php';
 
                 <?php
 				//change nav if signed in
-				if (!isset($_SESSION["loggedin"])) {
+				 if(isset($_SESSION['JetRedAdmin'])){
+                    print " Logged In: ";
+					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['redAdmin'] . '  </a>';
+					print " | ";
+					print '<a id="signOut" class="account" S href="signout.php">Log Out</a>';
+                }
+
+				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
 							<a id="registerAccount" class="account" S href="Register.php">Register</a>
 							';
-				} else {
+				} 
+                
+                
+                else {
 					print " Logged In: ";
 					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['user'] . '  </a>';
 					print " | ";

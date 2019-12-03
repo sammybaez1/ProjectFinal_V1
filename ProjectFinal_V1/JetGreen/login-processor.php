@@ -18,7 +18,6 @@ session_start();
         .account {
             color: white;
         }
-
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -44,16 +43,15 @@ session_start();
             //failed to login
         }else{
             $user = $result->fetch_assoc();
-            $_SESSION['admin'] = true;
-            $_SESSION['loggedin'] = true;
-            $_SESSION['user'] =  $user['user_id'];
+            $_SESSION['JetGreenAdmin'] = true;
+            $_SESSION['greenAdmin'] =  $user['user_id'];
         }
         
         
 	} else {
 		$user = $result->fetch_assoc();
 
-		$_SESSION['loggedin'] = true;
+		$_SESSION['customerLoggedIn'] = true;
 		$_SESSION['user'] =  $user['user_id'];
 	}
 
@@ -83,7 +81,7 @@ session_start();
                     </li>
                     <?php
 					//change nav if signed in
-                    if(isset($_SESSION['admin'])){
+                    if(isset($_SESSION['JetGreenAdmin'])){
                         	print '
 
 					<li class="nav-item">
@@ -91,7 +89,7 @@ session_start();
 					</ li>
 					';
                     }
-					else if (isset($_SESSION["loggedin"])) {
+					else if (isset($_SESSION["customerLoggedIn"])) {
 						print '
 
 					<li class="nav-item">
@@ -109,7 +107,14 @@ session_start();
 
                 <?php
 				//change nav if signed in
-				if (!isset($_SESSION["loggedin"])) {
+				if(isset($_SESSION['JetGreenAdmin'])){
+                    print " Logged In: ";
+					print '<a id="myprofile" class="account" S href="myprofile.php">   ' . $_SESSION['greenAdmin'] . '  </a>';
+					print " | ";
+					print '<a id="signOut" class="account" S href="signout.php">Log Out</a>';
+                }
+
+				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
 							<a id="registerAccount" class="account" S href="Register.php">Register</a>
@@ -136,11 +141,11 @@ session_start();
 			$user = $result->fetch_assoc();
 			echo 'Success ' . $user['user_id'];
 
-			if (!$_SESSION["loggedin"]) {
-				print "?";
-			} else {
+			//if (!$_SESSION["customerLoggedIn"]) {
+		//		print "?";
+		//	} else {
 				print " Logged In";
-			}
+		//	}
 
 			?>
         </div>
