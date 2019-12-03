@@ -108,7 +108,7 @@ function remove($flightID){
 				else if (!isset($_SESSION["customerLoggedIn"])) {
 					print '
 							<a id="userAccount" class="account" href="login.php">Sign in</a>
-							<a id="registerAccount" class="account" S href="Register.php">Register</a>
+							<a id="registerAccount" class="account" S href="register.php">Register</a>
 							';
 				}else {
 					print " Logged In: ";

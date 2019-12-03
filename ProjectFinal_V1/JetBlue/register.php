@@ -52,7 +52,7 @@ session_start();
 				print ' <a> Today is  ' . $_SESSION['currentDate'] . '  </a><br>';
 				?>
                 <a class="account" href="login.php">Sign in</a>
-                <a class="account" S href="Register.php">Register</a>
+                <a class="account" S href="register.php">Register</a>
             </div>
 
         </nav>
