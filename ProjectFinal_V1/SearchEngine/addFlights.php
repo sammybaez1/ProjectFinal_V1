@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require '../database-connection.php';
 ?>
 <!doctype html>
 <html>
@@ -95,7 +95,7 @@ session_start();
         <!-- nav -->
 
         <div class="container bg-light">
-            <form action="processFlightCreation.php" method="post" id="flightForm">
+            <form action="addFlights.php" method="post" id="flightForm">
                 <label for="airline">Airline</label>
                 <select name="airline">
                     <option value="JetBlue">JetBlue</option>
